@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="de">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Vagrant - Development environments made easy</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.min.css">
+    <link rel="stylesheet" href="bower_components/reveal.js/css/theme/night.css" id="theme">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="bower_components/reveal.js/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="bower_components/reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body class="scanlines">
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Vagrant</h1>
+          <h3>Development environments made easy</h3>
+          <p>
+            <small><a href="http://www.elwichtel.de">Felix Peters</a> / <a href="http://twitter.com/el_wichtel">@el_wichtel</a></small>
+          </p>
+        </section>
+     
+        <section>
+          <h2>Felix Peters</h2>
+          <p>Vollblut Onliner und PHP-Entwickler</p>
+
+            <p><a href="http://www.wichteldesign.de">www.wichteldesign.de</a> / <a href="http://www.felixpeters.de">www.felixpeters.de</a></p>
+            <p>Twitter: <a href="http://twitter.com/el_wichtel">@el_wichtel</a></p>
+            <p>Github: <a href="https://github.com/Wichteldesign">Wichteldesign</a></p>
+
+
+        </section> 
+
+        <section>
+          <section>
+            <h2>$vagrant init</h2>
+            <p>Eine kurze Einführung</p>
+          </section>
+
+          <section>
+            <h2>Wie arbeitet ihr bisher?</h2>
+            <p>Linux? Ok, easy...</p>
+            <p>MAMP/XAMPP?</p>
+            <p>Virtual Box?</p>
+            <p>Direkt am Server?</p>
+            <p>Was ganz anderes? (erzählen!)</p>
+          </section>
+
+          <section>
+            <blockquote>"For me it works"</blockquote>
+            <p><small>- unknown developer -</small></p>
+            <img src="img/missing_depencyies.jpg">
+          </section>
+
+          <section>
+          <img src="img/logo_vagrant.png">
+            <blockquote cite="http://www.vagrantup.com/">
+              Create and configure lightweight, reproducible, and portable development environments.
+            </blockquote>
+            <small>www.vagrantup.com</small>
+          </section>
+
+
+          <section>
+            <h3>Configuration</h3>
+            <p>+ Provider</p>
+            <p>+ Provisioner</p>
+            <p>+ Plugins</p>
+            <h2>= <b>Vagrant</b></h2>
+          </section>
+
+          <section>
+            <h2>Configuration (Vagrantfile)</h2>
+            <pre><code data-trim>
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "hashicorp/precise64"  
+  config.vm.network "forwarded_port", guest: 80, host: 8081
+  config.vm.synced_folder "vagrant", "/var/www/vagrant"
+
+  config.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+
+  config.vm.provision "chef_solo" do |chef|
+     chef.add_role "webserver"
+    }
+  end
+end
+            </pre></code>       
+
+            <p><small><a href="http://docs.vagrantup.com/v2/vagrantfile/index.html">http://docs.vagrantup.com/v2/vagrantfile/index.html</a></small></p>
+          </section>
+
+          <section>
+            <h2>Provider</h2>
+            <p>VirtualBox, VMware, Docker, Hyper-V, Amazon AWS, Rackspace, ...</p>
+            <p>&nbsp;</p>
+            <h2>Boxen</h2>
+            <p>Images von vorinstallierten Systemen (Linux, Windows, ...)</p>
+            <p><a href="https://vagrantcloud.com">https://vagrantcloud.com</a></p>
+            <p>Sind Provider abhängig!</p>
+            <p><small><a href="http://docs.vagrantup.com/v2/getting-started/boxes.html">http://docs.vagrantup.com/v2/getting-started/boxes.html</a></small></p>
+          </section>
+
+      
+
+          <section>
+            <h2>Provisioner</h2>
+            <img src="img/automate-all-the-things.jpg">            
+          </section>
+          <section>
+            <p><b>Shell, Chef, Puppet, Ansible, Docker, Salt, ...</b></p>            
+            <img src="img/WhopperVMcDonalds.jpg">
+            <p><small>http://www.wix.com/blog/wp-content/uploads/2012/01/WhopperVMcDonalds.jpg</small></p>
+            <p>Hier wird's tricky, aber mächtig!</p>
+            <p><small><a href="http://docs.vagrantup.com/v2/provisioning/index.html">http://docs.vagrantup.com/v2/provisioning/index.html</a></small></p>
+          </section>
+
+          <section>
+            <h2>"Configuration as Code"</h2>
+            <blockquote>"Code your desired system state"</blockquote>
+            <p>&nbsp;</p>
+            <p>Dokumentierte Umgebung</p>
+            <p>Versionierbar</p>
+            <p>Wiederholbar - auf Dev, Stage und Live!</p>
+          </section>
+
+          <section>
+            <h2>Plugins</h2>
+            <blockquote>Plugins are powerful, first-class citizens that extend Vagrant using a well-documented, stable API that can withstand major version upgrades.</blockquote><br><br>
+            <p>Erweitern Vagrant um weitere nützliche Funktionen</p><br>
+            <p>z.B Package Manager für Provisioner wie librarian usw.</p>
+            <p>Provider für AWS, Racksapce, ...</p>
+            <p><small><a href="https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins">https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins</a></small></p>
+          </section>
+
+        </section>
+
+        <section>
+            <section>
+              <h2>Die coolen Features</h2>      
+              <img src="http://techie.com/wp-content/uploads/2012/11/cereal-guy-cereal-guy-spitting-l.png">    
+            </section>
+            <section>
+              <h2>Synced Folder</h2>
+              <p>Ordner zwischen Gast-System und VM syncronisieren</p><br>
+              <p><b>RSync, SMB, NFS, VirtualBox</b></p><br>
+              <pre>
+              <code data-trim>
+              config.vm.synced_folder "vagrant", "/var/www/vagrant"
+              </code>
+            </pre>
+            <p><small><a href="http://docs.vagrantup.com/v2/synced-folders/index.html">http://docs.vagrantup.com/v2/synced-folders/index.html</a></small></p>
+            </section>
+            <section>
+              <h2>Network</h2>
+              <h3>FORWARDED PORTS</h3>
+              <p>Lokale Ports auf die VM mappen und weiterleiten</p>
+              <pre>
+              <code data-trim>
+              Vagrant.configure("2") do |config|
+                config.vm.network "forwarded_port", guest: 80, host: 8080
+              end
+              </code>
+            </pre>
+            <p><small><a href="http://docs.vagrantup.com/v2/networking/index.html">http://docs.vagrantup.com/v2/networking/index.html</a></small></p>
+            </section>        
+            <section>
+              <h2>VAGRANT SHARE</h2>
+              <p>Neu seit Vagrant 1.5</p>
+              <p>Tunnel in die VM von außerhalb (z.B. für Payment Systeme)</p>
+              <p>Alternative: <a href="https://ngrok.com/">Ngrok</a></p>
+              <p><small><a href="http://docs.vagrantup.com/v2/share/index.html">http://docs.vagrantup.com/v2/share/index.html</a></small></p>
+            </section>
+            <section>
+              <h2>MULTI-MACHINE</h2>
+              <p>Production Umgebung nachstellen</p>
+              <p>Mehrerer VM's deployen aus einer Konfiguration</p>
+              <p>API lokal testen</p>
+              <p>Ausfälle, Cluster usw. lokal testen</p>
+              <pre><code>
+  Vagrant.configure("2") do |config|
+    config.vm.provision "shell", inline: "echo Hello"
+
+    config.vm.define "web" do |web|
+      web.vm.box = "apache"
+    end
+
+    config.vm.define "db" do |db|
+      db.vm.box = "mysql"
+    end
+  end
+              </code></pre>
+              <p><small><a href="http://docs.vagrantup.com/v2/multi-machine/index.html">http://docs.vagrantup.com/v2/multi-machine/index.html</a></small></p>
+            </section>
+
+          <section>
+            <h2>Continuous Integration</h2>
+            <p>Jenkins kann Vagrant Boxen starten und deployen</p>
+            <p><a href="https://wiki.jenkins-ci.org/display/JENKINS/Vagrant+Plugin">https://wiki.jenkins-ci.org/display/JENKINS/Vagrant+Plugin</a></p>
+          </section>
+
+         <section>
+             <h2>Phansible</h2>
+             <img src="img/Phansible.png">
+             <p><a href="http://phansible.com/">http://phansible.com/</a></p>      
+          
+        </section>
+
+         <section>
+             <h2>PUPHPET</h2>
+             <img src="img/puphpet.png">
+             <p><a href="https://puphpet.com/">https://puphpet.com/</a></p>                 
+        </section>
+ </section>
+        <section>
+            <h1>Demo-Time!</h1>
+            <h2>$vagrant up</h2>
+            <img src="img/tumblr_inline_n1h1w9xP6K1raprkq.gif">
+          </section>                    
+      </div>
+    </div>
+
+    <script src="bower_components/reveal.js/lib/js/head.min.js"></script>
+    <script src="bower_components/reveal.js/js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'bower_components/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'bower_components/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'bower_components/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'bower_components/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'bower_components/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
