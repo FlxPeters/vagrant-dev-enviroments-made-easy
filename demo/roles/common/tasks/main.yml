@@ -1,0 +1,9 @@
+--- 
+
+- name: install common packages
+  yum: pkg={{ item }} state=latest
+  with_items:
+    - curl
+    - python-setuptools
+    - libselinux-python
+  when: ansible_os_family == "RedHat"

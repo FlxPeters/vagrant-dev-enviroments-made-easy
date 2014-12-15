@@ -1,0 +1,5 @@
+geerlingguy.ntp
+geerlingguy.apache
+geerlingguy.php
+geerlingguy.repo-remi
+geerlingguy.repo-epel

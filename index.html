@@ -57,16 +57,15 @@
 <section>
     <section>
         <h2>$vagrant init</h2>
-        <p>Eine kurze Einführung</p>
+        <p>a brief introduction</p>
     </section>
 
     <section>
-        <h2>Wie arbeitet ihr bisher?</h2>
         <p>Linux? Ok, easy...</p>
         <p>MAMP/XAMPP?</p>
         <p>Virtual Box?</p>
-        <p>Direkt am Server?</p>
-        <p>Was ganz anderes? (erzählen!)</p>
+        <p>Server?</p>
+        <p>...</p>
     </section>
 
     <section>
@@ -128,10 +127,9 @@
         <h2>Provider</h2>
         <p>VirtualBox, VMware, Docker, Hyper-V, Amazon AWS, Rackspace, ...</p>
         <p>&nbsp;</p>
-        <h3>Boxen</h3>
-        <p>Images von vorinstallierten Systemen (Linux, Windows, ...)</p>
+        <h3>Box</h3>
+        <p>Preinstalled images of Linux, Windows, etc. with some required Tools like git or puppet</p>
         <p><a href="https://vagrantcloud.com">https://vagrantcloud.com</a></p>
-        <p>Sind Provider abhängig!</p>
         <p>
             <small><a href="http://docs.vagrantup.com/v2/getting-started/boxes.html">http://docs.vagrantup.com/v2/getting-started/boxes.html</a></small>
         </p>
@@ -151,96 +149,91 @@
             <small><a href="http://docs.vagrantup.com/v2/provisioning/index.html">http://docs.vagrantup.com/v2/provisioning/index.html</a></small>
         </p>
     </section>
-
-    <section>
-        <h2>Plugins</h2>
-        <blockquote>Plugins are powerful, first-class citizens that extend Vagrant using a well-documented, stable API that can withstand major version
-            upgrades.
-        </blockquote>
-        <br><br>
-        <p>Erweitern Vagrant um weitere nützliche Funktionen</p><br>
-        <p>z.B Package Manager für Provisioner wie librarian usw.</p>
-        <p>Provider für AWS, Racksapce, ...</p>
-        <p>
-            <small><a href="https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins">https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins</a>
-            </small>
-        </p>
-    </section>
 </section>
 
 <section>
     <section>
-        <h2>Die coolen Features</h2>
-        <img src="http://techie.com/wp-content/uploads/2012/11/cereal-guy-cereal-guy-spitting-l.png">
+        <h2>The cool Features</h2>
+        <img src="http://img1.wikia.nocookie.net/__cb20120602054303/icarly/images/c/c6/Cereal_Guy.png">
+        <small>http://img1.wikia.nocookie.net/__cb20120602054303/icarly/images/c/c6/Cereal_Guy.png</small>
     </section>
-    <section>
-        <h2>Synced Folder</h2>
-
-        <p>Ordner zwischen Gast-System und VM syncronisieren</p><br>
-
-        <p><b>RSync, SMB, NFS, VirtualBox</b></p><br>
-              <pre>
-              <code data-trim>
-                  config.vm.synced_folder "vagrant", "/var/www/vagrant"
-              </code>
-            </pre>
-        <p>
-            <small><a href="http://docs.vagrantup.com/v2/synced-folders/index.html">http://docs.vagrantup.com/v2/synced-folders/index.html</a></small>
-        </p>
-    </section>
+    
     <section>
         <h2>Network</h2>
 
         <h3>FORWARDED PORTS</h3>
 
-        <p>Lokale Ports auf die VM mappen und weiterleiten</p>
+        <p>Map local ports to ports on the box</p>
               <pre>
               <code data-trim>
-                  Vagrant.configure("2") do |config|
-                  config.vm.network "forwarded_port", guest: 80, host: 8080
-                  end
+Vagrant.configure("2") do |config|
+    config.vm.network "forwarded_port", guest: 80, host: 8080
+ end
               </code>
             </pre>
         <p>
             <small><a href="http://docs.vagrantup.com/v2/networking/index.html">http://docs.vagrantup.com/v2/networking/index.html</a></small>
         </p>
     </section>
+    
+    <section>
+        <h2>Synced Folder</h2>
+
+        <p>Sync local folders to the box (mostly on the fly)</p><br>
+
+        <p><b>RSync, SMB, NFS, VirtualBox</b></p><br>
+              <pre>
+              <code data-trim>
+                  config.vm.synced_folder "./vagrant", "/var/www/vagrant"
+              </code>
+            </pre>
+        <p>
+            <small><a href="http://docs.vagrantup.com/v2/synced-folders/index.html">http://docs.vagrantup.com/v2/synced-folders/index.html</a></small>
+        </p>
+    </section>
+        
+    <section>
+        <h2>Plugins</h2>
+        <blockquote>Plugins are powerful, first-class citizens that extend Vagrant using a well-documented, stable API that can withstand major version
+            upgrades.
+        </blockquote>
+        <br><br>
+        <p>Add new features or modify existing</p><br>
+        <p>Packagemanager, Host-Updater, Local Domain Resolution, etc.</p>
+        <p>Provider for AWS, Racksapce, etc.</p>
+        <p>
+            <small><a href="https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins">https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins</a></small>
+        </p>
+    </section>
+    
     <section>
         <h2>VAGRANT SHARE</h2>
-
-        <p>Neu seit Vagrant 1.5</p>
-
-        <p>Tunnel in die VM von außerhalb (z.B. für Payment Systeme)</p>
-
+        <p>New in Vagrant 1.5</p>
+        <p>Expose a box to the web via ssh</p>
         <p>Alternative: <a href="https://ngrok.com/">Ngrok</a></p>
-
         <p>
             <small><a href="http://docs.vagrantup.com/v2/share/index.html">http://docs.vagrantup.com/v2/share/index.html</a></small>
         </p>
     </section>
     <section>
         <h2>MULTI-MACHINE</h2>
+        <p>Simulate Cloud-Enviroments / Cluster</p>
+        <p>Local integration tests</p>
+        <p>Local failover tests</p>
+        <br>
+        <pre><code>
+Vagrant.configure("2") do |config|
+    config.vm.provision "shell", inline: "echo Hello"
 
-        <p>Production Umgebung nachstellen</p>
+    config.vm.define "web" do |web|
+        web.vm.box = "apache"
+    end
 
-        <p>Mehrerer VM's deployen aus einer Konfiguration</p>
-
-        <p>API lokal testen</p>
-
-        <p>Ausfälle, Cluster usw. lokal testen</p>
-              <pre><code>
-                  Vagrant.configure("2") do |config|
-                  config.vm.provision "shell", inline: "echo Hello"
-
-                  config.vm.define "web" do |web|
-                  web.vm.box = "apache"
-                  end
-
-                  config.vm.define "db" do |db|
-                  db.vm.box = "mysql"
-                  end
-                  end
-              </code></pre>
+    config.vm.define "db" do |db|
+        db.vm.box = "mysql"
+    end
+end
+        </code></pre>
         <p>
             <small><a href="http://docs.vagrantup.com/v2/multi-machine/index.html">http://docs.vagrantup.com/v2/multi-machine/index.html</a></small>
         </p>
@@ -249,7 +242,7 @@
     <section>
         <h2>Continuous Integration</h2>
 
-        <p>Jenkins kann Vagrant Boxen starten und deployen</p>
+        <p>Deploy a vagrant box from jenkis as isolated enviroment</p>
 
         <p><a href="https://wiki.jenkins-ci.org/display/JENKINS/Vagrant+Plugin">https://wiki.jenkins-ci.org/display/JENKINS/Vagrant+Plugin</a></p>
     </section>

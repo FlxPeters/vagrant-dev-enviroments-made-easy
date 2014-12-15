@@ -1,0 +1,13 @@
+---
+- hosts: default
+  sudo:  true
+
+  roles:
+    - common
+    - geerlingguy.ntp
+    - geerlingguy.repo-epel
+    - geerlingguy.repo-remi
+    - geerlingguy.apache
+
+    # PHP
+    - geerlingguy.php
