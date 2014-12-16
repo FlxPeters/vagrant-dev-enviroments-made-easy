@@ -90,7 +90,7 @@
 
     <section>
         <h2>As a developer:</h2>
-        <p>Isolate dependencies and their configuration</p>
+        <p>Isolate application dependencies and their configuration</p>
         <p>Plattform independent</p>
         <p>Reproducable, disposable, consistent environments</p>
         <br/>
@@ -99,15 +99,15 @@
 
     <section>
         <h2>As a operations engineer:</h2>
-        <p>Test infrastructure management scripts</p>
+        <p>Test your infrastructure management scripts</p>
         <p>Run the same scripts directly in a cloud</p>
         <p>Provide production like development enviroments</p>
-        <p>Test multiple machine setups</p>
+        <p>Test multi machine setups</p>
     </section>
 
     <section>
         <h2>As a designer</h2>
-        <p> Set everything up that is required for that web app in order for you to focus on doing what you do best: </p>
+        <p> Set everything up that is required for a web app in order for you to focus on doing what you do best: </p>
         <br/>
         <p><b>design!</b></p>
     </section>
@@ -128,7 +128,7 @@
         <p>VirtualBox, VMware, Docker, Hyper-V, Amazon AWS, Rackspace, ...</p>
         <p>&nbsp;</p>
         <h3>Box</h3>
-        <p>Preinstalled images of Linux, Windows, etc. with some required Tools like git or puppet</p>
+        <p>Preinstalled images of Linux, Windows, etc. with some required tools like git or puppet</p>
         <p><a href="https://vagrantcloud.com">https://vagrantcloud.com</a></p>
         <p>
             <small><a href="http://docs.vagrantup.com/v2/getting-started/boxes.html">http://docs.vagrantup.com/v2/getting-started/boxes.html</a></small>
@@ -168,7 +168,7 @@
               <code data-trim>
 Vagrant.configure("2") do |config|
     config.vm.network "forwarded_port", guest: 80, host: 8080
- end
+end
               </code>
             </pre>
         <p>
@@ -198,8 +198,8 @@ Vagrant.configure("2") do |config|
             upgrades.
         </blockquote>
         <br><br>
-        <p>Add new features or modify existing</p><br>
-        <p>Packagemanager, Host-Updater, Local Domain Resolution, etc.</p>
+        <p>Add new features or modify existing ones</p><br>
+        <p>Package Manager, Host Updater, Local Domain Resolution, etc.</p>
         <p>Provider for AWS, Racksapce, etc.</p>
         <p>
             <small><a href="https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins">https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins</a></small>
@@ -217,7 +217,7 @@ Vagrant.configure("2") do |config|
     </section>
     <section>
         <h2>MULTI-MACHINE</h2>
-        <p>Simulate Cloud-Enviroments / Cluster</p>
+        <p>Simulate cloud / cluster enviroments</p>
         <p>Local integration tests</p>
         <p>Local failover tests</p>
         <br>
@@ -241,30 +241,24 @@ end
 
     <section>
         <h2>Continuous Integration</h2>
-
-        <p>Deploy a vagrant box from jenkis as isolated enviroment</p>
-
+        <p>Use a vagrant box from Jenkis as isolated test enviroment</p>
         <p><a href="https://wiki.jenkins-ci.org/display/JENKINS/Vagrant+Plugin">https://wiki.jenkins-ci.org/display/JENKINS/Vagrant+Plugin</a></p>
     </section>
 
     <section>
         <h2>Phansible</h2>
         <img src="img/Phansible.png">
-
         <p><a href="http://phansible.com/">http://phansible.com/</a></p>
-
     </section>
 
     <section>
         <h2>PUPHPET</h2>
         <img src="img/puphpet.png">
-
         <p><a href="https://puphpet.com/">https://puphpet.com/</a></p>
     </section>
 </section>
 <section>
     <h1>Demo-Time!</h1>
-
     <h2>$vagrant up</h2>
     <img src="img/tumblr_inline_n1h1w9xP6K1raprkq.gif">
 </section>
